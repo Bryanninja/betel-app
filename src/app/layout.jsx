@@ -24,11 +24,42 @@ const inter = Inter({
   display: 'swap',
 });
 
+const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : process.env.NEXT_PUBLIC_VERCEL_URL
+  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  : 'http://localhost:3000';
+
 export const metadata = {
-  title: 'Igreja Batista Betel',
-  description: 'Aplicativo oficial da Igreja Batista Betel',
+  metadataBase: new URL(baseUrl),
+  title: 'Plano de Leitura Bíblica 2026 - Igreja Batista Betel',
+  description: 'Acompanhe o plano anual de leitura bíblica de 2026 da Igreja Batista Betel. Organize sua leitura diária, marque seus capítulos concluídos e cresça na Palavra.',
   icons: {
-    icon: '/betel-favicon.svg', // Temp fallback to the current one
+    icon: '/betel-favicon.svg',
+    shortcut: '/betel-favicon.svg',
+    apple: '/betel-favicon.svg',
+  },
+  openGraph: {
+    title: 'Plano de Leitura Bíblica 2026 - Igreja Batista Betel',
+    description: 'Acompanhe o plano anual de leitura bíblica de 2026 da Igreja Batista Betel. Organize sua leitura diária, marque seus capítulos concluídos e cresça na Palavra.',
+    url: '/',
+    siteName: 'Igreja Batista Betel',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Plano de Leitura Bíblica 2026 - Igreja Batista Betel',
+      },
+    ],
+    locale: 'pt_BR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Plano de Leitura Bíblica 2026 - Igreja Batista Betel',
+    description: 'Acompanhe o plano anual de leitura bíblica de 2026 da Igreja Batista Betel. Organize sua leitura diária, marque seus capítulos concluídos e cresça na Palavra.',
+    images: ['/og-image.png'],
   },
 };
 
