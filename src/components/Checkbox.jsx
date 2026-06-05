@@ -11,9 +11,6 @@ const Checkbox = ({ isChecked, onClick }) => {
       {/* Botão */}
       <button
         onClick={(e) => {
-          if (typeof navigator !== 'undefined' && navigator.vibrate) {
-            navigator.vibrate(30);
-          }
           if (onClick) onClick(e);
         }}
         type="button"
