@@ -60,7 +60,7 @@ const DailyReading = () => {
         )}
 
         {/* Button */}
-        <Button to="/plan" color="outline" size="lg" className="self-center">
+        <Button to="/leitura/completa" color="outline" size="lg" className="self-center">
           Ver Leitura completa
         </Button>
       </section>

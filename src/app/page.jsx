@@ -1,45 +1,33 @@
 "use client";
-import { useState, useEffect } from 'react';
-import ModalName from '../components/ModalName';
-import DailyReading from '../components/sections/DailyReading';
-import Header from '../components/sections/Header';
-import WelcomeCard from '../components/sections/WelcomeCard';
+import dynamic from "next/dynamic";
+import Navbar from "../components/landing/Navbar";
+import HeroSection from "../components/landing/HeroSection";
+import TextReveal from "../components/landing/TextReveal";
+import ServiceCards from "../components/landing/ServiceCards";
+import PhotoCarousel from "../components/landing/PhotoCarousel";
+import PastorsSection from "../components/landing/PastorsSection";
+import KidsSection from "../components/landing/KidsSection";
+import ReadingPlanCTA from "../components/landing/ReadingPlanCTA";
+import LocationFooter from "../components/landing/LocationFooter";
 
-export default function Home() {
-  const [showModal, setShowModal] = useState(false);
-  const [userName, setUserName] = useState('');
-  const [mounted, setMounted] = useState(false);
+// Dynamic import SmoothScroll to avoid SSR issues with Lenis
+const SmoothScroll = dynamic(
+  () => import("../components/landing/SmoothScroll"),
+  { ssr: false }
+);
 
-  useEffect(() => {
-    setMounted(true);
-    const savedName = localStorage.getItem('user-name');
-    if (!savedName) {
-      setShowModal(true);
-    } else {
-      setUserName(savedName);
-    }
-  }, []);
-
-  const handleUserEntered = () => {
-    const savedName = localStorage.getItem('user-name');
-    setUserName(savedName || '');
-    setShowModal(false);
-  };
-
-  if (!mounted) return null;
-
+export default function LandingPage() {
   return (
-    <main className="relative">
-      <ModalName isOpen={showModal} onEnter={handleUserEntered} />
-      
-      {/* Só renderiza o conteúdo da página quando o modal for fechado e o nome estiver salvo */}
-      {!showModal && userName && (
-        <>
-          <Header />
-          <WelcomeCard name={userName} />
-          <DailyReading />
-        </>
-      )}
-    </main>
+    <SmoothScroll>
+      <Navbar />
+      <HeroSection />
+      <TextReveal />
+      <ServiceCards />
+      <PhotoCarousel />
+      <PastorsSection />
+      <KidsSection />
+      <ReadingPlanCTA />
+      <LocationFooter />
+    </SmoothScroll>
   );
 }

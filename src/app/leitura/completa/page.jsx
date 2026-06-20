@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from 'react';
-import ArrowBack from '../../components/ArrowBack';
-import Header from '../../components/sections/Header';
-import MonthToggle from '../../components/sections/MonthToggle';
+import ArrowBack from '../../../components/ArrowBack';
+import Header from '../../../components/sections/Header';
+import MonthToggle from '../../../components/sections/MonthToggle';
 
 export default function Plan() {
   const [activeMonth, setActiveMonth] = useState(null);
@@ -16,12 +16,9 @@ export default function Plan() {
         'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
         'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
       ];
-
-      // Se for de janeiro a junho, abre o Julho por padrão. Se for de julho a dezembro, abre o mês atual.
       if (monthIndex < 6) {
         return 'Julho';
       }
-
       return monthNamesPT[monthIndex];
     };
 
@@ -46,7 +43,7 @@ export default function Plan() {
 
   return (
     <main className="relative min-h-screen bg-betel-black">
-      <ArrowBack to="/" />
+      <ArrowBack to="/leitura" />
       <Header />
       <div className="mx-auto -mt-36 grid max-w-[1440px] grid-cols-1 gap-4 px-3 pb-20 md:px-6">
         {months.map((month) => (

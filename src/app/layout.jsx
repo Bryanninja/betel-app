@@ -1,10 +1,6 @@
 import { Archivo, Inter, Montserrat } from 'next/font/google';
 
 import '../index.css';
-// Global styles
-import { Providers } from './providers';
-
-// Context providers wrapper
 
 const arquivo = Archivo({
   subsets: ['latin'],
@@ -28,16 +24,18 @@ const baseUrl = 'https://www.ibbetelpl.com.br';
 
 export const metadata = {
   metadataBase: new URL(baseUrl),
-  title: 'Plano de Leitura Bíblica 2026 - Igreja Batista Betel',
-  description: 'Acompanhe o plano anual de leitura bíblica de 2026 da Igreja Batista Betel. Organize sua leitura diária, marque seus capítulos concluídos e cresça na Palavra.',
+  title: 'Igreja Batista Betel | Pedro Leopoldo - Casa de Deus. Sua casa.',
+  description:
+    'Igreja Batista Betel em Pedro Leopoldo, MG. Cultos aos Domingos 18h e Quartas 19:30h. Geração Betel, Betel Kids, Betel Teens e Plano de Leitura Bíblica 2026.',
   icons: {
     icon: '/betel-favicon.svg',
     shortcut: '/betel-favicon.svg',
     apple: '/betel-favicon.svg',
   },
   openGraph: {
-    title: 'Plano de Leitura Bíblica 2026 - Igreja Batista Betel',
-    description: 'Acompanhe o plano anual de leitura bíblica de 2026 da Igreja Batista Betel. Organize sua leitura diária, marque seus capítulos concluídos e cresça na Palavra.',
+    title: 'Igreja Batista Betel | Pedro Leopoldo',
+    description:
+      'Casa de Deus. Sua casa. Cultos aos Domingos 18h e Quartas 19:30h. Venha nos visitar!',
     url: '/',
     siteName: 'Igreja Batista Betel',
     images: [
@@ -45,7 +43,7 @@ export const metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Plano de Leitura Bíblica 2026 - Igreja Batista Betel',
+        alt: 'Igreja Batista Betel - Pedro Leopoldo',
       },
     ],
     locale: 'pt_BR',
@@ -53,8 +51,9 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Plano de Leitura Bíblica 2026 - Igreja Batista Betel',
-    description: 'Acompanhe o plano anual de leitura bíblica de 2026 da Igreja Batista Betel. Organize sua leitura diária, marque seus capítulos concluídos e cresça na Palavra.',
+    title: 'Igreja Batista Betel | Pedro Leopoldo',
+    description:
+      'Casa de Deus. Sua casa. Cultos aos Domingos 18h e Quartas 19:30h.',
     images: ['/og-image.png'],
   },
 };
@@ -66,7 +65,7 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} ${arquivo.variable} ${montserrat.variable}`}
     >
       <body className="min-h-screen bg-betel-black font-sans text-betel-ice antialiased">
-        <Providers>{children}</Providers>
+        {children}
       </body>
     </html>
   );
