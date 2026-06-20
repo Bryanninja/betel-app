@@ -24,11 +24,7 @@ const inter = Inter({
   display: 'swap',
 });
 
-const baseUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : process.env.NEXT_PUBLIC_VERCEL_URL
-  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-  : 'http://localhost:3000';
+const baseUrl = 'https://www.ibbetelpl.com.br';
 
 export const metadata = {
   metadataBase: new URL(baseUrl),
