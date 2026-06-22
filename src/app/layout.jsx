@@ -26,7 +26,7 @@ export const metadata = {
   metadataBase: new URL(baseUrl),
   title: 'Igreja Batista Betel | Pedro Leopoldo - Casa de Deus. Sua casa.',
   description:
-    'Igreja Batista Betel em Pedro Leopoldo, MG. Cultos aos Domingos 18h e Quartas 19:30h. Geração Betel, Betel Kids, Betel Teens e Plano de Leitura Bíblica 2026.',
+    'Igreja Batista Betel em Pedro Leopoldo, MG. Cultos aos Domingos 18h e Quartas 19h30. Geração Betel, Betel Kids, Betel Teens e Plano de Leitura Bíblica 2026.',
   icons: {
     icon: '/betel-favicon.svg',
     shortcut: '/betel-favicon.svg',
@@ -35,7 +35,7 @@ export const metadata = {
   openGraph: {
     title: 'Igreja Batista Betel | Pedro Leopoldo',
     description:
-      'Casa de Deus. Sua casa. Cultos aos Domingos 18h e Quartas 19:30h. Venha nos visitar!',
+      'Casa de Deus. Sua casa. Cultos aos Domingos 18h e Quartas 19h30. Venha nos visitar!',
     url: '/',
     siteName: 'Igreja Batista Betel',
     images: [
@@ -53,7 +53,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Igreja Batista Betel | Pedro Leopoldo',
     description:
-      'Casa de Deus. Sua casa. Cultos aos Domingos 18h e Quartas 19:30h.',
+      'Casa de Deus. Sua casa. Cultos aos Domingos 18h e Quartas 19h30.',
     images: ['/photos/adoracao.webp'],
   },
 };

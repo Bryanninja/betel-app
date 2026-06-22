@@ -100,7 +100,7 @@ export default function YouthSection() {
             muita presença de Deus, louvor intenso, comunhão genuína e uma
             palavra que transforma realidades.
           </p>
-          <p className="mb-6 text-sm text-white/40">Aos Sábados, 18:30h</p>
+          <p className="mb-6 text-sm text-white/40">Aos Sábados, 18h30</p>
           <a
             href="https://instagram.com/geracaobetel.pl"
             target="_blank"
