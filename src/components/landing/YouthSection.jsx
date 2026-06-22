@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
 
 import { gsap } from '../../lib/gsapConfig';
 
@@ -51,11 +52,12 @@ export default function YouthSection() {
           <div className="grid h-[400px] grid-cols-2 grid-rows-2 gap-3 md:h-[550px] lg:h-[650px] lg:gap-4">
             {/* Large vertical image */}
             <div className="relative row-span-2 overflow-hidden rounded-3xl border border-white/5 shadow-2xl">
-              <img
+              <Image
                 src="/photos/adoracao-jovem.webp"
                 alt="Geração Betel - Jovens"
-                className="h-full w-full object-cover grayscale-[20%] transition-transform duration-700 hover:scale-105"
-                loading="lazy"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover grayscale-[20%] transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-betel-black/50 to-transparent" />
             </div>
@@ -74,11 +76,12 @@ export default function YouthSection() {
 
             {/* Small horizontal image (Bottom Right) */}
             <div className="relative overflow-hidden rounded-3xl border border-white/5 shadow-2xl">
-              <img
+              <Image
                 src="/photos/jovens-pregacao.webp"
                 alt="Momentos Jovens"
-                className="h-full w-full object-cover grayscale-[20%] transition-transform duration-700 hover:scale-105"
-                loading="lazy"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover grayscale-[20%] transition-transform duration-700 hover:scale-105"
               />
             </div>
           </div>

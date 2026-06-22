@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
 
 import { gsap } from '../../lib/gsapConfig';
 
@@ -85,10 +86,12 @@ export default function PastorsSection() {
             >
               {/* Photo Header */}
               <div className="relative h-64 w-full overflow-hidden">
-                <img
+                <Image
                   src={pastor.image}
                   alt={pastor.name}
-                  className="h-full w-full object-cover object-top transition-transform duration-700 hover:scale-105"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover object-top transition-transform duration-700 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-betel-black/90 via-betel-black/20 to-transparent" />
               </div>

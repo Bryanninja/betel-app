@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
 
 import { gsap } from '../../lib/gsapConfig';
 
@@ -128,11 +129,13 @@ export default function PhotoCarousel() {
               className="relative w-[85vw] max-w-4xl flex-shrink-0 snap-center md:w-[70vw]"
             >
               <div className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-xl">
-                <img
+                <Image
                   src={photo.src}
                   alt={photo.alt}
-                  className="pointer-events-none h-full w-full object-cover object-[25%_32%]"
-                  loading={i === 0 ? 'eager' : 'lazy'}
+                  fill
+                  sizes="(max-width: 768px) 85vw, 70vw"
+                  priority={i === 0}
+                  className="pointer-events-none object-cover object-[25%_32%]"
                   draggable="false"
                 />
                 {/* Caption overlay */}

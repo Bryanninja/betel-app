@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
 
 import { gsap } from '../../lib/gsapConfig';
 
@@ -92,22 +93,24 @@ export default function KidsSection() {
 
             {/* Large vertical image (Right side) */}
             <div className="relative row-span-2 overflow-hidden rounded-3xl border border-white/5 shadow-2xl">
-              <img
+              <Image
                 src="/photos/betel-kids-teaching-2.webp"
                 alt="Ministério Betel Kids"
-                className="h-full w-full object-cover object-[80%_32%] grayscale-[10%] transition-transform duration-700 hover:scale-105"
-                loading="lazy"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover object-[80%_32%] grayscale-[10%] transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-betel-black/50 to-transparent" />
             </div>
 
             {/* Small horizontal image (Bottom Left) */}
             <div className="relative overflow-hidden rounded-3xl border border-white/5 shadow-2xl">
-              <img
+              <Image
                 src="/photos/kids-selfie.webp"
                 alt="Momentos Kids"
-                className="h-full w-full object-cover grayscale-[10%] transition-transform duration-700 hover:scale-105"
-                loading="lazy"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover grayscale-[10%] transition-transform duration-700 hover:scale-105"
               />
             </div>
           </div>

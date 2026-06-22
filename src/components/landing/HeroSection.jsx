@@ -5,6 +5,8 @@ import { useGSAP } from '@gsap/react';
 
 import { gsap } from '../../lib/gsapConfig';
 
+import Image from 'next/image';
+
 export default function HeroSection() {
   const heroRef = useRef(null);
   const imageRef = useRef(null);
@@ -89,10 +91,13 @@ export default function HeroSection() {
         ref={imageRef}
         className="absolute inset-0 -top-[10%] h-[120%] w-full"
       >
-        <img
+        <Image
           src="/photos/adoracao.webp"
           alt="Culto na Igreja Batista Betel"
-          className="h-full w-full object-cover object-[25%_32%]"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[25%_32%]"
         />
         {/* Dark overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-betel-black/70 via-betel-black/50 to-betel-black" />
@@ -106,6 +111,8 @@ export default function HeroSection() {
         <img
           src="/logo-betel.svg"
           alt="Igreja Batista Betel"
+          width={160}
+          height={80}
           className="hero-logo h-12 w-auto md:h-20"
         />
 

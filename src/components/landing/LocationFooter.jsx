@@ -173,18 +173,18 @@ export default function LocationFooter() {
               <img
                 src="/betel-favicon.svg"
                 alt="Betel"
-                className="h-5 w-5 opacity-30 brightness-0 invert"
+                className="h-5 w-5 opacity-50 brightness-0 invert"
               />
-              <span className="text-xs text-white/30">
+              <span className="text-xs text-white/50">
                 © 2026 Igreja Batista Betel
               </span>
             </div>
-            <div className="flex gap-4 text-xs text-white/30">
+            <div className="flex gap-4 text-xs text-white/50">
               <a href="/privacidade" className="transition-colors hover:text-white">Política de Privacidade</a>
               <a href="/termos" className="transition-colors hover:text-white">Termos de Uso</a>
             </div>
           </div>
-          <span className="text-xs text-white/20">Casa de Deus. Sua casa.</span>
+          <span className="text-xs text-white/40">Casa de Deus. Sua casa.</span>
         </div>
       </footer>
     </section>

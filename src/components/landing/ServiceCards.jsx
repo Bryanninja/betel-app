@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
 
 import { gsap } from '../../lib/gsapConfig';
 
@@ -123,10 +124,12 @@ export default function ServiceCards() {
               {/* Optional Background Image */}
               {service.image && (
                 <div className="absolute inset-0 z-0">
-                  <img
+                  <Image
                     src={service.image}
                     alt={service.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-br from-betel-black/90 via-betel-black/70 to-betel-red/40" />
                 </div>
