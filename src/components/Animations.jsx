@@ -15,13 +15,14 @@ export const FadeUp = ({ children, delay = 0, className = '' }) => (
 );
 
 // Animação para Modais (Escala + Fade)
-export const ModalTransition = ({ children, className = '' }) => (
+export const ModalTransition = ({ children, className = '', ...props }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.95, y: 20 }}
     animate={{ opacity: 1, scale: 1, y: 0 }}
     exit={{ opacity: 0, scale: 0.95, y: 20 }}
     transition={{ type: 'spring', damping: 25, stiffness: 300 }}
     className={className}
+    {...props}
   >
     {children}
   </motion.div>

@@ -1,61 +1,66 @@
-"use client";
-import { useRef } from "react";
-import { gsap } from "../../lib/gsapConfig";
-import { useGSAP } from "@gsap/react";
+'use client';
+import { useRef } from 'react';
+
+import { useGSAP } from '@gsap/react';
+
+import { gsap } from '../../lib/gsapConfig';
 
 const socialLinks = [
   {
-    label: "@ibbetelpl",
-    href: "https://instagram.com/ibbetelpl",
-    description: "Igreja Batista Betel",
+    label: '@ibbetelpl',
+    href: 'https://instagram.com/ibbetelpl',
+    description: 'Igreja Batista Betel',
   },
   {
-    label: "@geracaobetel.pl",
-    href: "https://instagram.com/geracaobetel.pl",
-    description: "Geração de Betel",
+    label: '@geracaobetel.pl',
+    href: 'https://instagram.com/geracaobetel.pl',
+    description: 'Geração de Betel',
   },
   {
-    label: "@betelkidspl",
-    href: "https://instagram.com/betelkidspl",
-    description: "Betel Kids",
+    label: '@betelkidspl',
+    href: 'https://instagram.com/betelkidspl',
+    description: 'Betel Kids',
   },
 ];
 
 export default function LocationFooter() {
   const sectionRef = useRef(null);
 
-  useGSAP(() => {
-    gsap.from(".location-content", {
-      opacity: 0,
-      y: 40,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        once: true,
-      },
-    });
+  useGSAP(
+    () => {
+      gsap.to('.location-content', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          once: true,
+        },
+      });
 
-    gsap.from(".social-link", {
-      opacity: 0,
-      y: 20,
-      stagger: 0.1,
-      duration: 0.6,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".social-links-container",
-        start: "top 85%",
-        once: true,
-      },
-    });
-  }, { scope: sectionRef });
+      gsap.to('.social-link', {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.social-links-container',
+          start: 'top 85%',
+          once: true,
+        },
+      });
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section
       id="localizacao"
       ref={sectionRef}
-      className="bg-betel-graphite px-4 pt-20 md:px-8 md:pt-28"
+      className="bg-betel-graphite px-6 pt-20 md:px-8 md:pt-28"
     >
       <div className="mx-auto max-w-[1440px]">
         {/* Section Header */}
@@ -68,14 +73,18 @@ export default function LocationFooter() {
           </h2>
         </div>
 
-        <div className="location-content flex flex-col gap-8 md:flex-row md:gap-12">
+        <div className="location-content flex translate-y-10 flex-col gap-8 opacity-0 md:flex-row md:gap-12">
           {/* Map */}
           <div className="flex-1 overflow-hidden rounded-2xl border border-white/5">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3747.5!2d-44.0434!3d-19.6186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa697c1b5e4a8ed%3A0x1234567890!2sRua+Comendador+Ant%C3%B4nio+Alves%2C+1403+-+Centro%2C+Pedro+Leopoldo+-+MG%2C+33250-033!5e0!3m2!1spt-BR!2sbr"
               width="100%"
               height="350"
-              style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) brightness(0.9) contrast(1.1)" }}
+              style={{
+                border: 0,
+                filter:
+                  'invert(90%) hue-rotate(180deg) brightness(0.9) contrast(1.1)',
+              }}
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -131,7 +140,7 @@ export default function LocationFooter() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="social-link group flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-4 py-3 transition-all duration-300 hover:border-betel-red/20 hover:bg-white/[0.05]"
+                    className="social-link group flex translate-y-5 items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-6 py-3 opacity-0 transition-all duration-300 hover:border-betel-red/20 hover:bg-white/[0.05]"
                   >
                     <svg
                       className="h-5 w-5 text-white/40 transition-colors duration-300 group-hover:text-betel-red"
@@ -158,16 +167,24 @@ export default function LocationFooter() {
 
       {/* Footer */}
       <footer className="mt-16 border-t border-white/5 py-8">
-        <div className="mx-auto max-w-[1440px] flex flex-col items-center justify-between gap-4 md:flex-row">
-          <div className="flex items-center gap-2">
-            <img src="/betel-favicon.svg" alt="Betel" className="h-5 w-5 brightness-0 invert opacity-30" />
-            <span className="text-xs text-white/30">
-              © 2026 Igreja Batista Betel — Pedro Leopoldo, MG
-            </span>
+        <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-4 md:flex-row">
+          <div className="flex flex-col items-center gap-2 md:flex-row md:gap-6">
+            <div className="flex items-center gap-2">
+              <img
+                src="/betel-favicon.svg"
+                alt="Betel"
+                className="h-5 w-5 opacity-30 brightness-0 invert"
+              />
+              <span className="text-xs text-white/30">
+                © 2026 Igreja Batista Betel
+              </span>
+            </div>
+            <div className="flex gap-4 text-xs text-white/30">
+              <a href="/privacidade" className="transition-colors hover:text-white">Política de Privacidade</a>
+              <a href="/termos" className="transition-colors hover:text-white">Termos de Uso</a>
+            </div>
           </div>
-          <span className="text-xs text-white/20">
-            Casa de Deus. Sua casa.
-          </span>
+          <span className="text-xs text-white/20">Casa de Deus. Sua casa.</span>
         </div>
       </footer>
     </section>

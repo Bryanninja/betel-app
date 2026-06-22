@@ -21,7 +21,8 @@ export default {
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'sans-serif'],
-        title: ['var(--font-archivo)', 'var(--font-montserrat)', 'sans-serif'],
+        title: ['var(--font-montserrat)', 'sans-serif'],
+        subtitle: ['var(--font-archivo)', 'sans-serif'],
       },
       backgroundImage: {
         'hero-gradient':

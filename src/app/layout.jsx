@@ -40,7 +40,7 @@ export const metadata = {
     siteName: 'Igreja Batista Betel',
     images: [
       {
-        url: '/og-image.png',
+        url: '/photos/adoracao.webp',
         width: 1200,
         height: 630,
         alt: 'Igreja Batista Betel - Pedro Leopoldo',
@@ -54,9 +54,11 @@ export const metadata = {
     title: 'Igreja Batista Betel | Pedro Leopoldo',
     description:
       'Casa de Deus. Sua casa. Cultos aos Domingos 18h e Quartas 19:30h.',
-    images: ['/og-image.png'],
+    images: ['/photos/adoracao.webp'],
   },
 };
+
+import SmoothScrollWrapper from '../components/SmoothScrollWrapper';
 
 export default function RootLayout({ children }) {
   return (
@@ -65,7 +67,9 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} ${arquivo.variable} ${montserrat.variable}`}
     >
       <body className="min-h-screen bg-betel-black font-sans text-betel-ice antialiased">
-        {children}
+        <SmoothScrollWrapper>
+          {children}
+        </SmoothScrollWrapper>
       </body>
     </html>
   );

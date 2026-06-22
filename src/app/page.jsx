@@ -5,8 +5,10 @@ import HeroSection from "../components/landing/HeroSection";
 import TextReveal from "../components/landing/TextReveal";
 import ServiceCards from "../components/landing/ServiceCards";
 import PhotoCarousel from "../components/landing/PhotoCarousel";
+import EssenceSection from "../components/landing/EssenceSection";
 import PastorsSection from "../components/landing/PastorsSection";
 import KidsSection from "../components/landing/KidsSection";
+import YouthSection from "../components/landing/YouthSection";
 import ReadingPlanCTA from "../components/landing/ReadingPlanCTA";
 import LocationFooter from "../components/landing/LocationFooter";
 
@@ -18,16 +20,18 @@ const SmoothScroll = dynamic(
 
 export default function LandingPage() {
   return (
-    <SmoothScroll>
+    <>
       <Navbar />
       <HeroSection />
       <TextReveal />
       <ServiceCards />
       <PhotoCarousel />
-      <PastorsSection />
+      <EssenceSection />
+      <YouthSection />
       <KidsSection />
+      <PastorsSection />
       <ReadingPlanCTA />
       <LocationFooter />
-    </SmoothScroll>
+    </>
   );
 }

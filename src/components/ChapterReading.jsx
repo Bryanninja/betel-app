@@ -23,24 +23,29 @@ const ChapterReading = ({
 
   const loadBibleText = useCallback(async () => {
     setLoading(true);
+    setReadingContent([]); // Limpa o estado anterior
     try {
       const details = getReadingDetails(fullReadingString);
-      const allRequests = details.flatMap((bookInfo) =>
-        bookInfo.chapters.map((ch) =>
-          api.get(`/verses/nvi/${bookInfo.abbrev}/${ch}`),
-        ),
-      );
+      const organizedData = [];
 
-      const responses = await Promise.all(allRequests);
-
-      const organizedData = responses.map((res) => ({
-        chapterName: `${res.data.book.name} ${res.data.chapter.number}`,
-        verses: res.data.verses,
-      }));
+      // Fetch sequencial para evitar bloqueio da API
+      for (const bookInfo of details) {
+        for (const ch of bookInfo.chapters) {
+          try {
+            const res = await api.get(`/verses/nvi/${bookInfo.abbrev}/${ch}`);
+            organizedData.push({
+              chapterName: `${res.data.book.name} ${res.data.chapter.number}`,
+              verses: res.data.verses,
+            });
+          } catch (err) {
+            console.error(`Erro ao buscar ${bookInfo.abbrev} ${ch}:`, err);
+          }
+        }
+      }
 
       setReadingContent(organizedData);
     } catch (error) {
-      console.error('Erro:', error);
+      console.error('Erro geral ao buscar capítulos:', error);
     } finally {
       setLoading(false);
     }
@@ -91,7 +96,7 @@ const ChapterReading = ({
           </motion.button>
 
           {/* 4. Usamos o ModalTransition para o conteúdo do leitor */}
-          <ModalTransition className="relative h-dvh w-full max-w-3xl overflow-y-auto bg-betel-graphite px-6 py-20 shadow-2xl transition-colors md:rounded-3xl md:px-10 md:py-12 [&::-webkit-scrollbar-button:single-button:vertical:decrement]:h-4 [&::-webkit-scrollbar-button:single-button:vertical:increment]:h-4 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-[3px] [&::-webkit-scrollbar-thumb]:border-solid [&::-webkit-scrollbar-thumb]:border-betel-graphite [&::-webkit-scrollbar-thumb]:bg-betel-red [&::-webkit-scrollbar-thumb]:bg-clip-padding [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-3">
+          <ModalTransition data-lenis-prevent className="overscroll-contain relative h-dvh w-full max-w-3xl overflow-y-auto bg-betel-graphite px-6 py-20 shadow-2xl transition-colors md:rounded-3xl md:px-10 md:py-12 [&::-webkit-scrollbar-button:single-button:vertical:decrement]:h-4 [&::-webkit-scrollbar-button:single-button:vertical:increment]:h-4 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-[3px] [&::-webkit-scrollbar-thumb]:border-solid [&::-webkit-scrollbar-thumb]:border-betel-graphite [&::-webkit-scrollbar-thumb]:bg-betel-red [&::-webkit-scrollbar-thumb]:bg-clip-padding [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-3">
             {loading ? (
               <div className="flex h-full flex-col items-center justify-center gap-4 py-20">
                 <Loader2 className="animate-spin text-betel-red" size={40} />

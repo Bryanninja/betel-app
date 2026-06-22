@@ -1,48 +1,53 @@
-"use client";
-import { useRef } from "react";
-import { gsap } from "../../lib/gsapConfig";
-import { useGSAP } from "@gsap/react";
+'use client';
+import { useRef } from 'react';
+
+import { useGSAP } from '@gsap/react';
+
+import { gsap } from '../../lib/gsapConfig';
 
 export default function KidsSection() {
   const sectionRef = useRef(null);
 
-  useGSAP(() => {
-    gsap.from(".kids-content", {
-      opacity: 0,
-      x: -40,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 75%",
-        once: true,
-      },
-    });
+  useGSAP(
+    () => {
+      gsap.to('.kids-content', {
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 75%',
+          once: true,
+        },
+      });
 
-    gsap.from(".kids-image", {
-      opacity: 0,
-      x: 40,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 75%",
-        once: true,
-      },
-    });
-  }, { scope: sectionRef });
+      gsap.to('.kids-image', {
+        opacity: 1,
+        x: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 75%',
+          once: true,
+        },
+      });
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-betel-graphite px-4 py-20 md:px-8 md:py-28"
+      className="relative overflow-hidden bg-betel-graphite px-6 py-20 md:px-8 md:py-28"
     >
       {/* Subtle warm accent */}
       <div className="absolute -left-32 top-1/2 h-64 w-64 -translate-y-1/2 rounded-full bg-amber-500/[0.03] blur-3xl" />
 
-      <div className="relative mx-auto flex max-w-[1440px] flex-col items-center gap-8 md:flex-row md:gap-16">
+      <div className="relative mx-auto flex max-w-[1440px] flex-col items-center gap-8 md:flex-row md:justify-between md:gap-16 lg:gap-24">
         {/* Text Content */}
-        <div className="kids-content flex-1 text-center md:text-left">
+        <div className="kids-content w-full max-w-lg -translate-x-10 text-center opacity-0 md:text-left">
           <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-amber-400/80">
             Ministério Infantil
           </span>
@@ -50,9 +55,9 @@ export default function KidsSection() {
             Betel Kids 💛
           </h2>
           <p className="mb-4 text-base leading-relaxed text-white/60 md:text-lg">
-            Um espaço especial onde as crianças aprendem sobre Jesus na linguagem
-            delas. Com professoras dedicadas, a salinha é dividida por faixas
-            etárias para que cada criança tenha a melhor experiência.
+            Um espaço especial onde as crianças aprendem sobre Jesus na
+            linguagem delas. Com professoras dedicadas, a salinha é dividida por
+            faixas etárias para que cada criança tenha a melhor experiência.
           </p>
           <p className="mb-6 text-sm text-white/40">
             Aos Domingos, 18h • Durante o culto principal
@@ -70,16 +75,41 @@ export default function KidsSection() {
           </a>
         </div>
 
-        {/* Photo */}
-        <div className="kids-image w-full max-w-sm flex-shrink-0 md:max-w-md">
-          <div className="relative overflow-hidden rounded-3xl border border-white/5">
-            <img
-              src="/photos/betel-kids.jpg"
-              alt="Ministério Betel Kids"
-              className="h-full w-full object-cover"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-betel-black/30 to-transparent" />
+        {/* Bento Grid Photos & Video */}
+        <div className="kids-image w-full flex-1 flex-shrink-0 translate-x-10 opacity-0">
+          <div className="grid h-[400px] grid-cols-2 grid-rows-2 gap-3 md:h-[550px] lg:h-[650px] lg:gap-4">
+            {/* Video Placeholder (Top Left) */}
+            <div className="group relative overflow-hidden rounded-3xl border border-white/5 bg-betel-graphite shadow-2xl">
+              <video
+                src="/videos/betel-kids.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="h-full w-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+
+            {/* Large vertical image (Right side) */}
+            <div className="relative row-span-2 overflow-hidden rounded-3xl border border-white/5 shadow-2xl">
+              <img
+                src="/photos/betel-kids-teaching-2.webp"
+                alt="Ministério Betel Kids"
+                className="h-full w-full object-cover object-[80%_32%] grayscale-[10%] transition-transform duration-700 hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-betel-black/50 to-transparent" />
+            </div>
+
+            {/* Small horizontal image (Bottom Left) */}
+            <div className="relative overflow-hidden rounded-3xl border border-white/5 shadow-2xl">
+              <img
+                src="/photos/kids-selfie.webp"
+                alt="Momentos Kids"
+                className="h-full w-full object-cover grayscale-[10%] transition-transform duration-700 hover:scale-105"
+                loading="lazy"
+              />
+            </div>
           </div>
         </div>
       </div>

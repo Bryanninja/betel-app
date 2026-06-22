@@ -1,104 +1,108 @@
-"use client";
-import { useRef, useState } from "react";
-import { gsap } from "../../lib/gsapConfig";
-import { useGSAP } from "@gsap/react";
+'use client';
+import { useRef } from 'react';
+
+import { useGSAP } from '@gsap/react';
+
+import { gsap } from '../../lib/gsapConfig';
 
 const photos = [
   {
-    src: "/photos/louvor.jpg",
-    alt: "Louvor na Igreja Batista Betel",
-    caption: "Louvor & Adoração",
+    src: '/photos/louvor.webp',
+    alt: 'Igreja Batista Betel',
+    caption: 'Louvor e Adoração',
   },
   {
-    src: "/photos/adoracao-jovem.jpg",
-    alt: "Jovem adorando na Igreja Batista Betel",
-    caption: "Adoração",
+    src: '/photos/batismo.webp',
+    alt: 'Batismo',
+    caption: 'Nova Vida',
+  },
+
+  {
+    src: '/photos/kids-all.webp',
+    alt: 'Ministério Infantil',
+    caption: 'Betel Kids',
   },
   {
-    src: "/photos/pastor-marcio.jpg",
-    alt: "Pastor Márcio em oração",
-    caption: "Oração",
+    src: '/photos/oracao.webp',
+    alt: 'Momento de Oração',
+    caption: 'Comunhão',
   },
   {
-    src: "/photos/betel-kids.jpg",
-    alt: "Betel Kids - Ministério Infantil",
-    caption: "Betel Kids",
-  },
-  // Placeholders for additional photos
-  {
-    src: null,
-    alt: "FOTO-GALERIA-1",
-    caption: "Momento especial",
-    placeholder: "Batismo, oração ou pregação",
+    src: '/photos/cauan-louvando.webp',
+    alt: 'Louvor',
+    caption: 'Propósito',
   },
   {
-    src: null,
-    alt: "FOTO-GALERIA-2",
-    caption: "Geração Betel",
-    placeholder: "Jovens no sábado",
+    src: '/photos/batismo-all.webp',
+    alt: 'Batismos na Igreja Batista Betel',
+    caption: 'Celebração',
+  },
+  {
+    src: '/photos/adoracao-igreja.webp',
+    alt: 'Igreja Adorando',
+    caption: 'Unidade',
+  },
+  {
+    src: '/photos/oracao-nara-henrique.webp',
+    alt: 'Oração',
+    caption: 'Família',
+  },
+  {
+    src: '/photos/adoracao-danie-mara.webp',
+    alt: 'Comunhão e Adoração',
+    caption: 'Nossa Vida',
+  },
+  {
+    src: '/photos/culto-adoracao.webp',
+    alt: 'Culto Betel',
+    caption: 'Alegria',
   },
 ];
 
 export default function PhotoCarousel() {
   const sectionRef = useRef(null);
-  const trackRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const scrollContainerRef = useRef(null);
 
-  // Only use photos that exist (have src)
-  const availablePhotos = photos.filter((p) => p.src !== null);
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        sectionRef.current,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            once: true,
+          },
+        },
+      );
+    },
+    { scope: sectionRef },
+  );
 
-  useGSAP(() => {
-    gsap.from(sectionRef.current, {
-      opacity: 0,
-      y: 40,
-      duration: 0.8,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top 80%",
-        once: true,
-      },
-    });
-  }, { scope: sectionRef });
-
-  const goTo = (index) => {
-    if (index < 0 || index >= availablePhotos.length) return;
-    setCurrentIndex(index);
-    if (trackRef.current) {
-      gsap.to(trackRef.current, {
-        x: `-${index * 100}%`,
-        duration: 0.6,
-        ease: "power3.out",
-      });
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
     }
   };
 
-  const handleDragStart = useRef(null);
-
-  const onTouchStart = (e) => {
-    handleDragStart.current = e.touches[0].clientX;
-  };
-
-  const onTouchEnd = (e) => {
-    if (handleDragStart.current === null) return;
-    const diff = handleDragStart.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0 && currentIndex < availablePhotos.length - 1) {
-        goTo(currentIndex + 1);
-      } else if (diff < 0 && currentIndex > 0) {
-        goTo(currentIndex - 1);
-      }
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
     }
-    handleDragStart.current = null;
   };
 
   return (
     <section
       id="galeria"
       ref={sectionRef}
-      className="overflow-hidden bg-betel-graphite py-20 md:py-28"
+      className="translate-y-10 overflow-hidden bg-betel-graphite py-20 opacity-0 md:py-28"
     >
-      <div className="mx-auto max-w-[1440px] px-4 md:px-8">
+      <div className="mx-auto max-w-[1440px] px-6 md:px-8">
         {/* Section Header */}
         <div className="mb-12 text-center md:mb-16">
           <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-widest text-betel-red">
@@ -110,33 +114,30 @@ export default function PhotoCarousel() {
         </div>
       </div>
 
-      {/* Carousel */}
-      <div
-        className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl"
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-      >
+      {/* Native Scroll Snapping Carousel */}
+      <div className="relative w-full">
         <div
-          ref={trackRef}
-          className="flex transition-none"
-          style={{ width: `${availablePhotos.length * 100}%` }}
+          ref={scrollContainerRef}
+          data-lenis-prevent="true"
+          className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto px-[7.5vw] pb-8 pt-4 md:gap-6 md:px-[15vw]"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {availablePhotos.map((photo, i) => (
+          {photos.map((photo, i) => (
             <div
               key={i}
-              className="relative w-full flex-shrink-0 px-2"
-              style={{ width: `${100 / availablePhotos.length}%` }}
+              className="relative w-[85vw] max-w-4xl flex-shrink-0 snap-center md:w-[70vw]"
             >
-              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
+              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-xl">
                 <img
                   src={photo.src}
                   alt={photo.alt}
-                  className="h-full w-full object-cover"
-                  loading={i === 0 ? "eager" : "lazy"}
+                  className="pointer-events-none h-full w-full object-cover object-[25%_32%]"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  draggable="false"
                 />
                 {/* Caption overlay */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                  <span className="text-sm font-semibold text-white/80">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 md:p-8">
+                  <span className="text-base font-semibold text-white/90 md:text-lg">
                     {photo.caption}
                   </span>
                 </div>
@@ -147,43 +148,61 @@ export default function PhotoCarousel() {
 
         {/* Navigation arrows (desktop) */}
         <button
-          onClick={() => goTo(currentIndex - 1)}
-          className={`absolute left-4 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:bg-white/20 md:flex ${
-            currentIndex === 0 ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
-          aria-label="Foto anterior"
+          onClick={scrollLeft}
+          className="absolute left-4 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full bg-betel-red/40 p-4 backdrop-blur-md transition-all duration-300 hover:bg-betel-red md:flex 2xl:left-12"
+          aria-label="Rolar para esquerda"
         >
-          <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          <svg
+            className="h-6 w-6 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
         </button>
         <button
-          onClick={() => goTo(currentIndex + 1)}
-          className={`absolute right-4 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:bg-white/20 md:flex ${
-            currentIndex === availablePhotos.length - 1 ? "opacity-0 pointer-events-none" : "opacity-100"
-          }`}
-          aria-label="Próxima foto"
+          onClick={scrollRight}
+          className="absolute right-4 top-1/2 z-10 hidden -translate-y-1/2 items-center justify-center rounded-full bg-betel-red/40 p-4 backdrop-blur-md transition-all duration-300 hover:bg-betel-red md:flex 2xl:right-12"
+          aria-label="Rolar para direita"
         >
-          <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          <svg
+            className="h-6 w-6 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </button>
       </div>
 
-      {/* Dots indicator */}
-      <div className="mt-6 flex items-center justify-center gap-2">
-        {availablePhotos.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === currentIndex
-                ? "w-8 bg-betel-red"
-                : "w-2 bg-white/20 hover:bg-white/40"
-            }`}
-            aria-label={`Ir para foto ${i + 1}`}
+      {/* Swipe hint for mobile */}
+      <div className="mt-4 flex items-center justify-center gap-2 text-white/40 md:hidden">
+        <svg
+          className="h-4 w-4 animate-pulse"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
           />
-        ))}
+        </svg>
+        <span className="text-xs">Arraste para o lado</span>
       </div>
     </section>
   );

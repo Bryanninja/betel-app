@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { FadeDown } from '../Animations';
 
 const Header = () => {
@@ -9,7 +10,9 @@ const Header = () => {
         2. valor extra (ex: 20px) para o conteúdo não colar no notch.
       */}
       <header className="flex flex-col items-center justify-center gap-10 bg-gradient-to-b from-betel-black to-betel-graphite pb-64 pt-[calc(env(safe-area-inset-top)+40px)] md:pt-16">
-        <img src="/logo-betel.svg" alt="Logo Igreja Batista Betel"></img>
+        <Link href="/" className="transition-transform hover:scale-105 active:scale-95">
+          <img src="/logo-betel.svg" alt="Logo Igreja Batista Betel" />
+        </Link>
 
         <h2 className="text-center font-title text-5xl font-bold text-white md:text-6xl">
           Plano de
