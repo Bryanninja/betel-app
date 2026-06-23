@@ -119,7 +119,6 @@ export default function PhotoCarousel() {
       <div className="relative w-full">
         <div
           ref={scrollContainerRef}
-          data-lenis-prevent="true"
           className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto px-[7.5vw] pb-8 pt-4 md:gap-6 md:px-[15vw]"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
