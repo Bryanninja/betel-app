@@ -28,7 +28,7 @@ const pastors = [
   },
   {
     name: 'Pr. Jorge & Pra. Márcia',
-    role: 'Filial Sete Lagoas',
+    role: 'Congregação de Sete Lagoas',
     verse:
       '"Quão formosos são os pés dos que anunciam as boas novas!" — Romanos 10:15',
     description:
